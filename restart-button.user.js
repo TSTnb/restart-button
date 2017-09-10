@@ -8,37 +8,33 @@
 // @include http://*tetrisfriends.com/games/Survival/game.php*
 // @include http://*tetrisfriends.com/games/Mono/game.php*
 // @grant none
-// @version 0.0.2
+// @version 0.0.3
 // @author knux
 // @run-at document-start
 // ==/UserScript==
 try {
-    function restartButton()
-    {
-        restartGame = function()
-            {
-                var flashElement = document.getElementById('contentFlash');
-                flashElement.as3_tetrisGameRestart();
-                flashElement.focus();
-            };
-        var restartElement = document.createElement('a');
-        restartElement.setAttribute('href', 'javascript:restartGame()');
-        restartElement.innerHTML = 'Restart Game';
-        try {
-            document.getElementById('game_options').parentNode.appendChild(document.createElement('br'));
-            document.getElementById('game_options').parentNode.appendChild(restartElement);
-        }catch(err) {
-         }
-        (addFlashListener = function()
+    restartGame = function()
         {
-            try {
-                document.getElementById('contentFlash').onkeyup = function(e){if(e.keyCode == 219) restartGame()};
-            }catch(err) {
-                setTimeout(addFlashListener, 200);
-            }
-        })();
-    }
-    restartButton();
+            var flashElement = document.getElementById('contentFlash');
+            flashElement.as3_tetrisGameRestart();
+            flashElement.focus();
+        };
+    var restartElement = document.createElement('a');
+    restartElement.setAttribute('href', 'javascript:restartGame()');
+    restartElement.innerHTML = 'Restart Game';
+    try {
+        document.getElementById('game_options').parentNode.appendChild(document.createElement('br'));
+        document.getElementById('game_options').parentNode.appendChild(restartElement);
+    }catch(err) {
+     }
+    (addFlashListener = function()
+    {
+        try {
+            document.getElementById('contentFlash').onkeyup = function(e){if(e.keyCode == 219) restartGame()};
+        }catch(err) {
+            setTimeout(addFlashListener, 200);
+        }
+    })();
 }catch(err) {
     alert(err + "\n" + err.stack);
 }
