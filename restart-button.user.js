@@ -18,16 +18,16 @@ function(){
     {
         restartGame = function()
             {
-                var flashEl = document.getElementById('contentFlash');
-                flashEl.as3_tetrisGameRestart();
-                flashEl.focus();
+                var flashElement = document.getElementById('contentFlash');
+                flashElement.as3_tetrisGameRestart();
+                flashElement.focus();
             };
-        var restartEl = document.createElement('a');
-        restartEl.setAttribute('href', 'javascript:restartGame()');
-        restartEl.innerHTML = 'Restart Game';
+        var restartElement = document.createElement('a');
+        restartElement.setAttribute('href', 'javascript:restartGame()');
+        restartElement.innerHTML = 'Restart Game';
         try {
             document.getElementById('game_options').parentNode.appendChild(document.createElement('br'));
-            document.getElementById('game_options').parentNode.appendChild(restartEl);
+            document.getElementById('game_options').parentNode.appendChild(restartElement);
         }catch(err) {
          }
         (addFlashListener = function()
