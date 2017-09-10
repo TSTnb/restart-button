@@ -7,22 +7,37 @@
 // @include http://*tetrisfriends.com/games/Sprint/game.php*
 // @include http://*tetrisfriends.com/games/Survival/game.php*
 // @include http://*tetrisfriends.com/games/Mono/game.php*
-// @grant none 
+// @grant none
 // @version 21 December 2013
 // @author knux
+// @run-at document-start
 // ==/UserScript==
-addEventListener("DOMContentLoaded", 
+addEventListener("DOMContentLoaded",
 function(){
-restartScript = document.createElement("script");
-restartScript.innerHTML = 
-'function restartGame(){var flashEl = document.getElementById("contentFlash");' + 
-'flashEl.as3_tetrisGameRestart();' + 
-'flashEl.focus();};' + 
-'var restartEl = document.createElement("a");' + 
-'restartEl.setAttribute("href", "javascript:restartGame()");' + 
-'restartEl.innerHTML = "Restart Game";' + 
-'document.getElementById("game_options").parentNode.appendChild(document.createElement("br"));' + 
-'document.getElementById("game_options").parentNode.appendChild(restartEl);' + 
-'document.getElementById("contentFlash").onkeyup = function(e){if(e.keyCode == 219) restartGame()}';
-document.body.appendChild(restartScript);
+    function restartButton()
+    {
+        restartGame = function()
+            {
+                var flashEl = document.getElementById("contentFlash");
+                flashEl.as3_tetrisGameRestart();
+                flashEl.focus();
+            };
+        var restartEl = document.createElement("a");
+        restartEl.setAttribute("href", "javascript:restartGame()");
+        restartEl.innerHTML = "Restart Game";
+        try {
+            document.getElementById("game_options").parentNode.appendChild(document.createElement("br"));
+            document.getElementById("game_options").parentNode.appendChild(restartEl);
+        }catch(err) {
+         }
+        (addFlashListener = function()
+        {
+            try {
+                document.getElementById("contentFlash").onkeyup = function(e){if(e.keyCode == 219) restartGame()};
+            }catch(err) {
+                setTimeout(addFlashListener, 200);
+            }
+        })();
+    }
+    restartScript = document.body.appendChild(document.createElement("script")).textContent = '(' + restartButton + ')()';
 })
