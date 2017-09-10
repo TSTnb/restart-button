@@ -8,7 +8,7 @@
 // @include http://*tetrisfriends.com/games/Survival/game.php*
 // @include http://*tetrisfriends.com/games/Mono/game.php*
 // @grant none
-// @version 0.0.4
+// @version 0.0.5
 // @author knux
 // @run-at document-start
 // ==/UserScript==
@@ -32,7 +32,7 @@ try {
     (addFlashListener = function()
     {
         try {
-            document.getElementById('contentFlash').onkeyup = function(e){if(e.keyCode == restartButton.charCodeAt(0)) restartGame()};
+            document.getElementById('contentFlash').onkeyup = function(e){if(e.key === restartButton) restartGame()};
         }catch(err) {
             setTimeout(addFlashListener, 200);
         }
