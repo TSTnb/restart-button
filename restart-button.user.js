@@ -8,12 +8,11 @@
 // @include http://*tetrisfriends.com/games/Survival/game.php*
 // @include http://*tetrisfriends.com/games/Mono/game.php*
 // @grant none
-// @version 21 December 2013
+// @version 0.0.2
 // @author knux
 // @run-at document-start
 // ==/UserScript==
-addEventListener('DOMContentLoaded',
-function(){
+try {
     function restartButton()
     {
         restartGame = function()
@@ -39,5 +38,7 @@ function(){
             }
         })();
     }
-    restartScript = document.body.appendChild(document.createElement('script')).textContent = '(' + restartButton + ')()';
-})
+    restartButton();
+}catch(err) {
+    alert(err + "\n" + err.stack);
+}
